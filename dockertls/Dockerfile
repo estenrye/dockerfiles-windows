@@ -1,5 +1,5 @@
 # escape=`
-FROM microsoft/windowsservercore AS installer-env
+FROM microsoft/windowsservercore-insider AS installer-env
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
 
 ENV VERSION 2.5.4
@@ -29,7 +29,7 @@ RUN Invoke-WebRequest $Env:PS_DOWNLOAD_URL -OutFile powershell.zip; `
     Expand-Archive powershell.zip -DestinationPath \PowerShell; `
     Remove-Item -Force powershell.zip
 
-FROM microsoft/nanoserver
+FROM microsoft/nanoserver-insider
 
 ENV ProgramFiles C:\Program Files
 COPY --from=installer-env ["\\PowerShell\\", "$ProgramFiles\\PowerShell"]
