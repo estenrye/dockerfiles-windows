@@ -34,6 +34,7 @@ Now create the certs and let the container
 ```powershell
 mkdir $env:USERPROFILE\.docker
 docker run --rm `
+  --user ContainerAdministrator `
   -e SERVER_NAME=$(hostname) `
   -e IP_ADDRESSES=127.0.0.1,192.168.254.135 `
   -v "c:\programdata\docker:c:\programdata\docker" `
@@ -71,6 +72,7 @@ In addition you can create a configuration for `docker-machine`. The container t
 ```powershell
 mkdir $env:USERPROFILE\.docker
 docker run --rm `
+  --user ContainerAdministrator `
   -e SERVER_NAME=$(hostname) `
   -e IP_ADDRESSES=127.0.0.1,192.168.254.135 `
   -e MACHINE_NAME=windows `
@@ -91,6 +93,7 @@ Ideally the key and password should be kept separate and only provided when addi
 mkdir $env:SystemDrive\DockerSSLCARoot
 mkdir $env:USERPROFILE\.docker
 docker run --rm `
+  --user ContainerAdministrator `
   -e SERVER_NAME=$(hostname) `
   -e IP_ADDRESSES=127.0.0.1,192.168.254.135 `
   -v "$env:SystemDrive\DockerSSLCARoot:c:\DockerSSLCARoot" `
@@ -106,6 +109,7 @@ For subsequent hosts you first need to copy over the DockerSSLCARoot directory f
 Copy-Item -Path <somesecurelocation>\DockerSSLCARoot c:\DockerSSLCARoot
 mkdir $env:USERPROFILE\.docker
 docker run --rm `
+  --user ContainerAdministrator `
   -e SERVER_NAME=$(hostname) `
   -e IP_ADDRESSES=127.0.0.1,192.168.254.135 `
   -v "$env:SystemDrive\DockerSSLCARoot:c:\DockerSSLCARoot" `
