@@ -36,9 +36,9 @@ COPY --from=installer-env ["\\PowerShell\\", "$ProgramFiles\\PowerShell"]
 ENV PSCORE="$ProgramFiles\PowerShell\PowerShell.exe"
 RUN setx /M PATH "%PATH%;%ProgramFiles%\PowerShell;C:\libressl"
 
-COPY --from=installer-env C:\libressl C:\libressl
+COPY --from=installer-env /libressl /libressl
 
-COPY openssl.cnf $LIBRESSLPATH/ssl/.
+COPY openssl.cnf /libressl/ssl/.
 COPY generate-certs.ps1 generate-certs.ps1
 
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
